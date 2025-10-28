@@ -1,0 +1,1 @@
+export { EntranceExamsSection } from "./EntranceExamsSection";
