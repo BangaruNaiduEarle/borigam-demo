@@ -1,0 +1,1 @@
+export { CourseInnerPage } from "./CourseInnerPage";

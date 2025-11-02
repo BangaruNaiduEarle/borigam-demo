@@ -224,18 +224,18 @@ export const HomePage = (): JSX.Element => {
 
         <SuccessStoriesSection />
 
-        <section id="contact-us" className=" w-full bg-white">
+        <section id="contact-us" className=" w-full bg-white pb-[42px]">
 
           <div className="[font-family:'Merriweather',Helvetica] font-bold text-[#ef5134] text-[46.3px] tracking-[0] leading-[normal]">
             <h1 className="text-center">
-            Contact us
+              Contact us
             </h1>
           </div>
           <ContactUsSection />
         </section>
 
 
-      <FooterSection />
+        <FooterSection />
       </div>
     </div >
   );

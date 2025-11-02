@@ -2,6 +2,7 @@ import { ChevronDownIcon } from "lucide-react";
 import React from "react";
 import { Button } from "../../../../components/ui/button";
 import logo from "../../../../assets/logo.png";
+import { Link } from "react-router-dom";
 
 const navigationItems = [
   { label: "Home", id: "home", hasDropdown: false },
@@ -54,11 +55,13 @@ export const ServicesSection = (): JSX.Element => {
         ))}
 
         {/* Portal Button */}
+        <Link to="/course">
         <Button className="h-[30px] gap-2.5 p-2.5 bg-black rounded-[5px] hover:bg-black/90 ml-2">
           <span className="[font-family:'Poppins',Helvetica] font-semibold text-[#fbbc04] text-sm tracking-[0] leading-[normal] whitespace-nowrap">
             Borigam Portal
           </span>
         </Button>
+        </Link>
       </nav>
     </header>
   );

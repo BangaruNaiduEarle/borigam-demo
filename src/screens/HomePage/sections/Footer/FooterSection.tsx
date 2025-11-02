@@ -9,7 +9,7 @@ import { SiX } from "react-icons/si"; // for the "X" (Twitter) logo
 
 export const FooterSection = () => {
   return (
-    <footer className="bg-[#e65332] text-white pt-16 pb-0 ">
+    <footer className="bg-[#e65332] text-white pt-16 pb-0 [font-family:'Poppins',Helvetica] ">
       {/* Top Section */}
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 text-left">
@@ -19,7 +19,7 @@ export const FooterSection = () => {
               ENTRANCE EXAM COACHING
             </h3>
             <ul className="space-y-1 text-white  leading-relaxed ">
-              <li>NID Entrance Exam</li>
+              <li >NID Entrance Exam</li>
               <li>CEED Entrance Exam</li>
               <li>UCEED Entrance Exam</li>
               <li>NATA & JEE P2 Entrance Exam</li>
