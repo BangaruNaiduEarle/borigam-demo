@@ -25,13 +25,15 @@ export const ServicesSection = (): JSX.Element => {
   return (
     <header className="flex items-end justify-center gap-[43px] bg-white w-full pb-2 shadow-sm">
       {/* Logo */}
+    <Link to="/">
+   
       <img
         className="h-[100px] w-auto md:h-[120px] object-contain self-end cursor-pointer"
         alt="Logo"
         src={logo}
         onClick={() => handleScroll("home")}
       />
-
+ </Link>
       {/* Navigation */}
       <nav className="flex items-center pt-[52px] pb-0 px-0">
         {navigationItems.map((item, index) => (
