@@ -163,7 +163,7 @@ export const CourseInnerPage = (): JSX.Element => {
         </section>
 
         {/* Two-Column Section */}
-        <section className="flex flex-col md:flex-row items-center gap-10 md:gap-20 px-4 sm:px-10 md:px-20 lg:px-[200px] py-16">
+        <section className="flex flex-col md:flex-row items-center gap-10 md:gap-20 px-8 sm:px-10 md:px-20 lg:px-[200px] py-16">
           <div className="flex flex-col gap-6">
             <h2 className="font-merriweather font-bold text-[#ef5134] text-3xl sm:text-[46.3px]">
               Heading
@@ -189,7 +189,7 @@ export const CourseInnerPage = (): JSX.Element => {
         </section>
 
         {/* Features List */}
-        <section className="px-4 sm:px-10 md:px-20 lg:px-[200px] py-12 bg-white">
+        <section className="px-8 sm:px-10 md:px-20 lg:px-[200px] py-12 bg-white">
           <h2 className="font-merriweather font-bold text-[#ef5134] text-3xl sm:text-[46.3px] mb-6">
             Features
           </h2>
@@ -211,7 +211,7 @@ export const CourseInnerPage = (): JSX.Element => {
         </section>
 
         {/* Support Links */}
-        <section className="px-4 sm:px-10 md:px-20 lg:px-[200px] py-14">
+        <section className="px-8 sm:px-10 md:px-20 lg:px-[200px] py-14">
           <h2 className="font-merriweather font-bold text-[#ef5134] text-3xl sm:text-[46.3px]">
             Support Links
           </h2>
@@ -233,7 +233,7 @@ export const CourseInnerPage = (): JSX.Element => {
         </section>
 
         {/* FAQ Section */}
-        <section className="px-4 sm:px-10 md:px-20 lg:px-[200px] py-14">
+        <section className="px-8 sm:px-10 md:px-20 lg:px-[200px] py-14">
           <h2 className="font-merriweather font-bold text-[#ef5134] text-3xl sm:text-[46.3px] mb-6">
             FAQ&apos;s
           </h2>
@@ -253,7 +253,7 @@ export const CourseInnerPage = (): JSX.Element => {
         </section>
 
         {/* Course Features */}
-        <section className="px-4 sm:px-10 md:px-20 lg:px-[200px] py-14">
+        <section className="px-8 sm:px-10 md:px-20 lg:px-[200px] py-14">
           <h2 className="font-merriweather font-bold text-[#ef5134] text-3xl sm:text-[46.3px]">
             Course Features
           </h2>
