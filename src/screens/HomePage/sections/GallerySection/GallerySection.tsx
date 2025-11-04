@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Card, CardContent } from "../../../../components/ui/card";
 import enterenceBg from "../../../../assets/enternce_exam_bg.png";
-import compass from "../../../../assets/compass.png"
+import compass from "../../../../assets/compass.png";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const examData = [
   { name: "NIFT", zIndex: "z-[7]" },
@@ -15,65 +19,100 @@ const examData = [
 ];
 
 export const GallerySection = (): JSX.Element => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const heading = sectionRef.current?.querySelector(".gallery-heading");
+      const para = sectionRef.current?.querySelector(".gallery-para");
+      const cards = gsap.utils.toArray(".exam-card") as HTMLElement[];
+
+      // Heading + paragraph fade-up
+      gsap.from([heading, para], {
+        opacity: 0,
+        y: 40,
+        duration: 1,
+        ease: "power3.out",
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 85%",
+        },
+      });
+
+      // Individual card fade-up animations
+      cards.forEach((card, i) => {
+        gsap.fromTo(
+          card,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power3.out",
+            delay: i * 0.05,
+            scrollTrigger: {
+              trigger: card,
+              start: "top 90%",
+            },
+          }
+        );
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section className="flex flex-col w-full items-center justify-center gap-2.5 px-4 md:px-[201px] py-[108px] relative bg-no-repeat bg-cover"
+    <section
+      ref={sectionRef}
+      className="relative flex flex-col items-center justify-center w-full px-4 sm:px-8 md:px-12 lg:px-20 py-16 sm:py-20 md:py-24 bg-no-repeat bg-cover bg-center overflow-hidden"
       style={{ backgroundImage: `url(${enterenceBg})` }}
     >
+      {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/60"></div>
-      <div className="flex flex-col w-full max-w-[1036px] items-center justify-center gap-[52px] relative">
-        <div className="flex flex-col items-center gap-[15px] relative w-full">
-          <h2 className="relative w-full [font-family:'Merriweather',Helvetica] font-bold text-white text-4xl md:text-[79.3px] text-center tracking-[0] leading-[normal]">
+
+      {/* Content */}
+      <div className="relative z-[2] flex flex-col items-center justify-center text-center w-full max-w-5xl gap-8 sm:gap-10 md:gap-14">
+        {/* Heading & Paragraph */}
+        <div className="flex flex-col items-center gap-3 sm:gap-4">
+          <h2 className="gallery-heading font-merriweather font-bold text-white text-3xl sm:text-4xl md:text-5xl lg:text-[68px] leading-tight">
             Entrance Exams
             <br />
             We Cover
           </h2>
 
-          <p className="relative w-full max-w-[560px] [font-family:'Poppins',Helvetica] font-normal text-white text-lg md:text-2xl text-center tracking-[0] leading-[normal]">
-            Comprehensive coaching for all major design and architecture
-            entrance examinations
+          <p className="gallery-para font-poppins font-normal text-white text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed max-w-[580px] mx-auto">
+            Comprehensive coaching for all major design and architecture entrance examinations
           </p>
         </div>
 
-
-        <div className="flex items-center justify-center relative w-full">
-          <div className="flex items-center justify-center">
-            {examData.map((exam, index) => (
-              <Card
-                key={exam.name}
-                className={`
-          ${exam.zIndex}
-          group flex flex-col w-[130.63px] h-[135.72px] items-center justify-center
-          gap-[26.44px] px-[21.15px] py-[15.87px] relative
-          ${index === 0 ? "ml-[-0.57px]" : ""}
-          ${index === examData.length - 1 ? "mr-[-0.57px]" : ""}
-          bg-neutral-50 border-solid border-0
-          rounded-none transition-all duration-500 ease-in-out text-[#646464] 
-          hover:border-b-4 hover:border-[#EF5134] hover:shadow-lg hover:text-[#EF5134]
-        `}
-              >
-                <CardContent className="flex flex-col items-center justify-center gap-[26.44px] p-0 w-full h-full">
-                  {/* Image Rotation */}
-                  <img
-                    src={compass}
-                    alt="compass"
-                    className="transform transition-transform duration-700 ease-in-out group-hover:rotate-45"
-                  />
-
-                  {/* Text Animation */}
-                  <div className="flex flex-col w-[103.5px] items-center justify-center gap-[8.31px] relative">
-                    <div
-                      className="relative w-fit font-medium  text-[17px] text-center tracking-[0] leading-[23.3px] whitespace-nowrap
-              transition-all duration-500 ease-in-out group-hover:translate-y-1"
-                    >
-                      {exam.name}
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+        {/* Cards */}
+        <div className="flex flex-wrap justify-center items-center gap-4 sm:gap-6 md:gap-8 mt-6 sm:mt-10">
+          {examData.map((exam) => (
+            <Card
+              key={exam.name}
+              className={`exam-card ${exam.zIndex} group flex flex-col items-center justify-center
+                w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] md:w-[135px] md:h-[135px]
+                bg-white border-0 rounded-none text-[#646464]
+                transition-all duration-500 ease-in-out
+                hover:border-b-4 hover:border-[#EF5134] hover:shadow-lg hover:text-[#EF5134]
+                opacity-0 transform translate-y-6
+              `}
+            >
+              <CardContent className="flex flex-col items-center justify-center gap-3 sm:gap-4 md:gap-5 p-0 w-full h-full">
+                <img
+                  src={compass}
+                  alt="Compass"
+                  className="w-[32px] sm:w-[38px] md:w-[42px] transition-transform duration-700 ease-in-out group-hover:rotate-45"
+                />
+                <span className="font-poppins font-medium text-sm sm:text-base md:text-[17px] leading-snug transition-transform duration-500 ease-in-out group-hover:translate-y-1">
+                  {exam.name}
+                </span>
+              </CardContent>
+            </Card>
+          ))}
         </div>
-
       </div>
     </section>
   );

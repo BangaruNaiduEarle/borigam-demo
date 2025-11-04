@@ -1,5 +1,5 @@
 import { ArrowLeftIcon, ArrowUpRightIcon } from "lucide-react";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -9,75 +9,22 @@ import {
 import { Button } from "../../components/ui/button";
 import { Card, CardContent } from "../../components/ui/card";
 import { ServicesSection } from "../HomePage/sections/ServicesSection";
-
+import { FooterSection } from "../HomePage/sections/Footer";
 import flight_vector from "../../assets/flight_vector.png";
 import course_banner from "../../assets/course_inner_banner.png";
 import course_section from "../../assets/course_inner_section.png";
 import cf1 from "../../assets/course_feature_1.jpg";
 import cf2 from "../../assets/course_feature_2.jpg";
 import cf3 from "../../assets/course_feature_3.jpg";
-
-
-
-import { FooterSection } from "../HomePage/sections/Footer";
+import whatsapp from "../../assets/whatsapp-icon-free-png.webp";
 import { Link } from "react-router-dom";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-
-
-
-const footerColumns = [
-  {
-    title: "ENTRANCE EXAM COACHING",
-    links: [
-      "NID Entrance Exam",
-      "CEED Entrance Exam",
-      "UCEED Entrance Exam",
-      "NATA & JEE P2 Entrance Exam",
-      "NIFT Entrance Exam",
-      "Portfolio Guidance",
-      "Student Testimonials",
-    ],
-  },
-  {
-    title: "STUDY MATERIAL",
-    links: [
-      "NID Entrance Exam",
-      "CEED Entrance Exam",
-      "UCEED Entrance Exam",
-      "NATA & JEE P2 Entrance Exam",
-      "NIFT Entrance Exam",
-      "Portfolio Guidance",
-      "Student Testimonials",
-    ],
-  },
-  {
-    title: "PAST YEAR PAPERS",
-    links: [
-      "NID Entrance Exam",
-      "CEED Entrance Exam",
-      "UCEED Entrance Exam",
-      "NATA & JEE P2 Entrance Exam",
-      "NIFT Entrance Exam",
-      "Portfolio Guidance",
-      "Student Testimonials",
-    ],
-  },
-  {
-    title: "MOCK TESTS",
-    links: [
-      "NID Entrance Exam",
-      "CEED Entrance Exam",
-      "UCEED Entrance Exam",
-      "NATA & JEE P2 Entrance Exam",
-      "NIFT Entrance Exam",
-      "Portfolio Guidance",
-      "Student Testimonials",
-    ],
-  },
-];
+gsap.registerPlugin(ScrollTrigger);
 
 const supportLinks = [
-  "Get course meterial",
+  "Get course material",
   "Works of Wonder",
   "Innovative Project Showcases",
   "Leading Architecture Colleges",
@@ -89,9 +36,9 @@ const supportLinks = [
 
 const faqItems = [
   { question: "Understanding NIFT Campuses" },
-  { question: "Understanding NIFT Campuses" },
-  { question: "Understanding NIFT Campuses" },
-  { question: "Understanding NIFT Campuses" },
+  { question: "How to prepare for NATA?" },
+  { question: "Is portfolio required for NID?" },
+  { question: "What is CEED and UCEED?" },
 ];
 
 const courseFeatures = [
@@ -112,270 +59,275 @@ const courseFeatures = [
   },
 ];
 
-const socialIcons = [
-  "/icons-3.svg",
-  "/icons-1.svg",
-  "/icons-2.svg",
-  "/icons.svg",
-  "/icons-4.svg",
-];
-
 export const CourseInnerPage = (): JSX.Element => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const sections = gsap.utils.toArray("section");
+
+      sections.forEach((section) => {
+        gsap.from(section as HTMLElement, {
+          opacity: 0,
+          y: 40,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: section,
+            start: "top 85%",
+          },
+        });
+      });
+
+      // Animate heading elements separately for staggered reveal
+      const headings = gsap.utils.toArray("h2, h1");
+      gsap.from(headings, {
+        opacity: 0,
+        y: 30,
+        duration: 0.6,
+        ease: "power3.out",
+        stagger: 0.15,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 90%",
+        },
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <div className="bg-white w-full min-w-[1440px] relative">
-      <div className="flex w-[348px] items-end justify-center gap-2.5 px-4 py-[18px] absolute top-0 left-[calc(50.00%_-_174px)] rounded-[0px_0px_15px_15px] bg-[linear-gradient(236deg,rgba(239,81,52,1)_0%,rgba(238,153,33,1)_100%)] z-10">
-        <div className="relative w-fit [font-family:'Poppins',Helvetica] font-bold text-white text-sm tracking-[0] leading-[normal] whitespace-nowrap">
-          Abroad education
-        </div>
-        <img
-          className="relative w-[19.49px] h-[19.49px] mb-[-0.75px]"
-          alt="Flight Vector"
-          src={flight_vector}
-        />
-      </div>
-      <ServicesSection />
+    <div ref={containerRef} className="bg-white w-full overflow-x-hidden flex justify-center">
 
-      <section className="mt-[33px] px-[204px]">
-        <div className="inline-flex items-center gap-[19px]">
-          <Link to={"/"}>
-            <ArrowLeftIcon className="w-[41px] h-[41px] text-[#ef5134]" />
-          </Link>
+      <div className="w-full max-w-7xl mx-auto relative">
 
-          <h1 className="w-fit mt-[-1.00px] [font-family:'Merriweather',Helvetica] font-bold text-[#ef5134] text-[46.3px] tracking-[0] leading-[normal]">
-            Course Heading here
-          </h1>
-        </div>
-      </section>
 
-      <section className="mt-[20px] px-[200px] flex justify-center items-center">
-        <div className="relative">
-          <img
-            className="w-[1040px] h-[454px] rounded-[13px] object-cover"
-            alt="Banner"
-            src={course_banner}
-          />
 
-          <div className="absolute top-[144px] left-[45px] [font-family:'Poppins',Helvetica] font-light text-white text-[78.9px] tracking-[1.58px] leading-[normal] whitespace-nowrap">
-            Banner
+        {/* Navbar */}
+        <ServicesSection />
+        {/* Floating Badge */}
+        {/* <div className="relative flex justify-center ">
+          <div
+            className="flex items-center justify-center gap-2.5 px-4 py-[12px] 
+      rounded-b-[15px] bg-gradient-to-r from-[#ef5134] to-[#ee9921] 
+      shadow-md w-[80%] sm:w-[300px] md:w-[340px] z-[5]"
+          >
+            <span className="font-poppins font-semibold text-white text-sm sm:text-base">
+              Abroad Education
+            </span>
+            <img className="w-[18px] h-[18px]" alt="Flight Vector" src={flight_vector} />
           </div>
+        </div> */}
 
-          <div className="absolute top-[215px] left-[45px] [font-family:'Poppins',Helvetica] font-light text-[#fbbc04] text-[78.9px] tracking-[1.58px] leading-[normal] whitespace-nowrap">
-            Sample
+        {/* Back Arrow + Heading */}
+        <section className="mt-10 px-4 sm:px-8 md:px-20 lg:px-[200px] flex flex-col gap-4">
+          <div className="flex items-center gap-3 sm:gap-5">
+            <Link to={"/"}>
+              <ArrowLeftIcon className="w-8 h-8 sm:w-[41px] sm:h-[41px] text-[#ef5134]" />
+            </Link>
+            <h1 className="font-merriweather font-bold text-[#ef5134] text-2xl sm:text-3xl md:text-[46.3px] leading-tight">
+              Course Heading Here
+            </h1>
           </div>
+        </section>
 
-          {/* <div className="inline-flex items-center justify-center gap-2.5 px-[34px] py-9 absolute top-[293px] left-[35px] bg-black">
-            <div className="w-fit mt-[-1.00px] [font-family:'Poppins',Helvetica] font-light text-white text-[52.9px] tracking-[1.06px] leading-[normal] whitespace-nowrap">
-              Boringa Inner page
+        {/* Banner */}
+        <section className="mt-6 px-4 sm:px-10 md:px-20 lg:px-[200px]">
+          <div className="relative">
+            <img
+              className="w-full h-[220px] sm:h-[340px] md:h-[454px] rounded-[13px] object-cover"
+              alt="Banner"
+              src={course_banner}
+            />
+
+            <div className="absolute top-[30%] left-[20px] sm:left-[40px]">
+              <h2 className="font-poppins font-light text-white text-4xl sm:text-6xl md:text-[78.9px] leading-none">
+                Banner
+              </h2>
+              <h2 className="font-poppins font-light text-[#fbbc04] text-4xl sm:text-6xl md:text-[78.9px] leading-none">
+                Sample
+              </h2>
             </div>
-          </div> */}
-        </div>
-      </section>
+          </div>
+        </section>
 
-      <section className="flex items-center justify-center gap-[34px] px-[206px] py-[79px] mt-[46px] bg-[#F5F5F5]">
-        <div className="flex flex-col items-center justify-center gap-[41px]">
-          <div className="inline-flex flex-col items-center  justify-center gap-[11px]">
-            <h2 className="mt-[-1.00px] [font-family:'Merriweather',Helvetica] font-bold text-[#ef5134] text-[46.3px] tracking-[0] leading-[normal] text-center">
-              Course Heading here
+        {/* Intro Section */}
+        <section className="flex flex-col items-center justify-center text-center gap-6 bg-[#F5F5F5] px-4 sm:px-10 md:px-20 lg:px-[200px] py-14 mt-12">
+          <h2 className="font-merriweather font-bold text-[#ef5134] text-3xl sm:text-[46.3px] leading-tight">
+            Course Heading Here
+          </h2>
+          <p className="font-poppins text-[#4d4d4d] text-base sm:text-lg md:text-2xl leading-normal">
+            We provide everything you need to excel <br /> in your entrance exams
+          </p>
+        </section>
+
+        {/* Two-Column Section */}
+        <section className="flex flex-col md:flex-row items-center gap-10 md:gap-20 px-4 sm:px-10 md:px-20 lg:px-[200px] py-16">
+          <div className="flex flex-col gap-6">
+            <h2 className="font-merriweather font-bold text-[#ef5134] text-3xl sm:text-[46.3px]">
+              Heading
             </h2>
-
-            <p className=" [font-family:'Poppins',Helvetica] font-light text-[#4d4d4d] text-2xl tracking-[0] leading-[normal]  text-center">
-              We provide everything you need to excel
-              <br />
-              in your entrance exams
+            <p className="font-poppins text-[#4d4d4d] text-lg md:text-2xl">
+              We provide everything you need to excel <br /> in your entrance exams
+            </p>
+            <p className="font-poppins text-[#555a66] text-sm leading-relaxed">
+              At Peakview Academy, our goal is to provide top-tier, results-driven education, empowering students to excel academically and personally. We pledge to:<br /><br />
+              • Provide expert instruction through dedicated and experienced faculty.<br />
+              • Cultivate a nurturing learning atmosphere.<br />
+              • Employ innovative teaching methods and tailored mentorship.<br />
+              • Develop strong ethics, analytical abilities, and a growth mindset.
             </p>
           </div>
-        </div>
-      </section>
+          <div className="w-full md:w-1/2 flex justify-center">
+            <img
+              className="rounded-2xl object-cover w-full sm:w-[400px] md:w-[475px]"
+              alt="Course Section"
+              src={course_section}
+            />
+          </div>
+        </section>
 
-      <section className="flex items-center mt-[130px] px-[200px]">
-        <div className="inline-flex flex-col items-start gap-[27px]">
-          <h2 className="w-fit mt-[-1.00px] [font-family:'Merriweather',Helvetica] font-bold text-[#ef5134] text-[46.3px] tracking-[0] leading-[normal]">
-            Heading
+        {/* Features List */}
+        <section className="px-4 sm:px-10 md:px-20 lg:px-[200px] py-12 bg-white">
+          <h2 className="font-merriweather font-bold text-[#ef5134] text-3xl sm:text-[46.3px] mb-6">
+            Features
           </h2>
 
-          <p className="w-[560px] [font-family:'Poppins',Helvetica] font-light text-[#4d4d4d] text-2xl tracking-[0] leading-[normal]">
-            We provide everything you need to excel
-            <br />
-            in your entrance exams
-          </p>
+          <div className="grid md:grid-cols-2 gap-10">
+            <ul className="font-poppins text-[#4d4d4d] text-sm leading-6 list-disc list-inside space-y-2">
+              <li>Experienced Faculty with real-world expertise.</li>
+              <li>Comprehensive Curriculum covering all NIFT topics.</li>
+              <li>Personalized Attention through small batch sizes.</li>
+              <li>State-of-the-Art Facilities simulating real exam environments.</li>
+            </ul>
 
-          <div className="w-[509px] [font-family:'Poppins',Helvetica] font-normal text-[#555a66] text-sm tracking-[0.28px] leading-[normal]">
-            At Peakview Academy, our goal is to provide top-tier, results-driven
-            education, empowering students to excel academically and personally.
-            We pledge to:
-            <br />
-            <br />
-            Provide expert instruction through dedicated and experienced
-            faculty.
-            <br />
-            Cultivate a structured, nurturing, and inspiring learning atmosphere
-            where every student is motivated to achieve their maximum potential.
-            <br />
-            Employ innovative teaching methods and tailored mentorship to cater
-            to diverse learning styles.
-            <br />
-            Develop robust ethics, analytical abilities, and a development
+            <ul className="font-poppins text-[#4d4d4d] text-sm leading-6 list-disc list-inside space-y-2">
+              <li>Regular Assessments to track progress.</li>
+              <li>Portfolio Development (where applicable).</li>
+              <li>Interview Preparation with mock sessions and feedback.</li>
+            </ul>
           </div>
-        </div>
+        </section>
 
-        <div className="flex justify-center items-center h-[475px]">
-          <img
-            className="rounded-2xl"
-            alt="Rectangle"
-            src={course_section}
-          />
-        </div>
+        {/* Support Links */}
+        <section className="px-4 sm:px-10 md:px-20 lg:px-[200px] py-14">
+          <h2 className="font-merriweather font-bold text-[#ef5134] text-3xl sm:text-[46.3px]">
+            Support Links
+          </h2>
 
-
-
-      </section>
-
-      <section className="mt-[100px] px-[200px]">
-        <h2 className="[font-family:'Merriweather',Helvetica] font-bold text-[#ef5134] text-[46.3px] tracking-[0] leading-[normal]">
-          Features
-        </h2>
-
-        <div className="flex gap-[79px] mt-[42px]">
-          {/* Left Column */}
-          <ul className="w-[502px] [font-family:'Poppins',Helvetica] font-medium text-[#4d4d4d] text-sm tracking-[0.28px] leading-[20.3px] list-disc list-inside space-y-2">
-            <li>Experienced Faculty: Our team comprises seasoned educators and industry experts.</li>
-            <li>Comprehensive Curriculum: Our curriculum covers all aspects of the NIFT exam.</li>
-            <li>Personalized Attention: Small batch sizes ensure that each student receives personalized guidance and mentorship.</li>
-            <li>State-of-the-Art Facilities: Our well-equipped studios and classrooms simulate real-world environments.</li>
-          </ul>
-
-          {/* Right Column */}
-          <ul className="w-[502px] [font-family:'Poppins',Helvetica] font-medium text-[#4d4d4d] text-sm tracking-[0.28px] leading-[20.3px] list-disc list-inside space-y-2">
-            <li>Regular Assessments: Frequent mock tests and assessments help track progress and identify areas for improvement.</li>
-            <li>Portfolio Development (Not required for NIFT): Specialized sessions on portfolio presentation and structure.</li>
-            <li>Interview Preparation: We offer training for the personal interview stage, including mock interviews and feedback sessions.</li>
-          </ul>
-        </div>
-      </section>
-
-
-      <section className="mt-[75px] px-[200px]">
-        <h2 className="[font-family:'Merriweather',Helvetica] font-bold text-[#ef5134] text-[46.3px] tracking-[0] leading-[normal]">
-          Support links
-        </h2>
-
-        <div className="grid grid-cols-3 gap-x-[123px] gap-y-[10px] mt-[42px]">
-          {supportLinks.map((link, index) => (
-            <Button
-              key={index}
-              variant="ghost"
-              className="w-fit h-auto inline-flex items-center justify-center gap-2.5 p-[15px] bg-neutral-50 rounded-[15px] hover:bg-neutral-100"
-            >
-              <span className="[font-family:'Poppins',Helvetica] font-medium text-[#4d4d4d] text-sm tracking-[0.28px] leading-[normal] whitespace-nowrap">
-                {link}
-              </span>
-
-              <ArrowUpRightIcon className="w-[25px] h-[25px]" />
-            </Button>
-          ))}
-        </div>
-      </section>
-
-      <section className="mt-[58px] px-[200px]">
-        <h2 className="[font-family:'Merriweather',Helvetica] font-bold text-[#ef5134] text-[46.3px] tracking-[0] leading-[normal]">
-          FAQ&apos;s
-        </h2>
-
-        <Accordion type="single" collapsible className="w-[1058px] mt-[42px]">
-          {faqItems.map((item, index) => (
-            <AccordionItem
-              key={index}
-              value={`item-${index}`}
-              className="border-b-0"
-            >
-              <AccordionTrigger className="flex items-center gap-2.5 p-[22px] hover:no-underline">
-                <span className="flex-1 text-left [font-family:'Inter',Helvetica] font-bold text-black text-lg tracking-[0] leading-[normal]">
-                  {item.question}
-                </span>
-              </AccordionTrigger>
-              <AccordionContent>
-                <div className="p-[22px] pt-0 pl-8 [font-family:'Poppins',Helvetica]">Content for {item.question}</div>
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </section>
-
-      <section className="mt-[82px] px-[200px]">
-        <h2 className="[font-family:'Merriweather',Helvetica] font-bold text-[#ef5134] text-[46.3px] tracking-[0] leading-[normal]">
-          Course Features
-        </h2>
-
-        <div className="flex gap-[20px] mt-[42px] mb-[100px]">
-          {courseFeatures.map((feature, index) => (
-            <Card
-              key={index}
-              className="w-[333px] bg-neutral-100 rounded-[10px] border-0"
-            >
-              <CardContent className="flex flex-col items-center gap-[17px] px-[25px] py-7">
-                <img
-                  className="w-full h-[190px] rounded-[10px] object-cover"
-                  alt="Course feature"
-                  src={feature.image}
-                />
-
-                <p className="w-[299px] ml-[-8.00px] mr-[-8.00px] [font-family:'Merriweather',Helvetica] font-bold text-black text-sm tracking-[0] leading-[normal]">
-                  {feature.description}
-                </p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      {/* <footer className="mt-[68px] bg-black pt-[137px] pb-[43px]">
-        <div className="flex justify-between px-[199px]">
-          {footerColumns.map((column, index) => (
-            <div key={index}>
-              <h3 className="[font-family:'Poppins',Helvetica] font-bold text-[#ed9821] text-sm tracking-[0] leading-[23.2px] whitespace-nowrap mb-[38px]">
-                {column.title}
-              </h3>
-
-              <div className="[font-family:'Poppins',Helvetica] font-normal text-white text-sm tracking-[0] leading-[23.2px]">
-                {column.links.map((link, linkIndex) => (
-                  <React.Fragment key={linkIndex}>
-                    {link}
-                    {linkIndex < column.links.length - 1 && <br />}
-                  </React.Fragment>
-                ))}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="flex flex-col items-start gap-[21.33px] mt-[145px] px-[199px]">
-          <h3 className="mt-[-1.33px] [font-family:'Forma_DJR_Display-Bold',Helvetica] font-bold text-[#fbfbfb] text-[21.3px] tracking-[1.07px] leading-8 whitespace-nowrap">
-            Connect with us
-          </h3>
-
-          <div className="inline-flex items-center gap-[21.33px]">
-            {socialIcons.map((icon, index) => (
-              <img
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mt-6">
+            {supportLinks.map((link, index) => (
+              <Button
                 key={index}
-                className="w-8 h-8"
-                alt="Social icon"
-                src={icon}
-              />
+                variant="ghost"
+                className="flex items-center justify-between w-full p-4 bg-neutral-50 hover:bg-neutral-100 rounded-[15px]"
+              >
+                <span className="font-poppins text-[#4d4d4d] text-sm text-left">
+                  {link}
+                </span>
+                <ArrowUpRightIcon className="w-5 h-5 text-[#ef5134]" />
+              </Button>
             ))}
           </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="px-4 sm:px-10 md:px-20 lg:px-[200px] py-14">
+          <h2 className="font-merriweather font-bold text-[#ef5134] text-3xl sm:text-[46.3px] mb-6">
+            FAQ&apos;s
+          </h2>
+
+          <Accordion type="single" collapsible className="w-full">
+            {faqItems.map((item, index) => (
+              <AccordionItem key={index} value={`item-${index}`} className="border-b border-gray-200">
+                <AccordionTrigger className="text-left font-inter font-bold text-lg text-black">
+                  {item.question}
+                </AccordionTrigger>
+                <AccordionContent className="font-poppins text-sm text-[#555a66] px-4 pb-4">
+                  Content for {item.question}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </section>
+
+        {/* Course Features */}
+        <section className="px-4 sm:px-10 md:px-20 lg:px-[200px] py-14">
+          <h2 className="font-merriweather font-bold text-[#ef5134] text-3xl sm:text-[46.3px]">
+            Course Features
+          </h2>
+
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 mt-8 mb-16">
+            {courseFeatures.map((feature, index) => (
+              <Card key={index} className="bg-neutral-100 rounded-[10px] border-0">
+                <CardContent className="flex flex-col items-center gap-4 p-6">
+                  <img
+                    className="w-full h-[180px] sm:h-[200px] object-cover rounded-[10px]"
+                    alt="Course feature"
+                    src={feature.image}
+                  />
+                  <p className="font-merriweather font-bold text-black text-sm text-center">
+                    {feature.description}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        {/* === Mobile Fixed Bottom Buttons (Borigam Theme) === */}
+        <div className="fixed bottom-0 left-0 w-full flex md:hidden z-[50] shadow-[0_-3px_10px_rgba(0,0,0,0.15)]">
+          {/* Left: Abroad Education */}
+          <button
+            className="flex-1 flex items-center justify-center gap-2 px-3 py-4 
+      bg-gradient-to-r from-[#ef5134] to-[#ee9921] 
+      text-white text-sm font-semibold [font-family:'Poppins',Helvetica] 
+      transition-all duration-300 active:scale-95"
+          >
+            <span>Abroad Education</span>
+            <img
+              className="w-[18px] h-[18px] object-contain"
+              alt="Flight Vector"
+              src={flight_vector}
+            />
+          </button>
+
+          {/* Right: Contact Us */}
+          <button
+            onClick={() => window.location.href = '#contact-us'}
+            className="flex-1 flex items-center justify-center gap-2 px-3 py-4 
+      bg-gradient-to-r from-[#fbbc04] to-[#ef5134] 
+      text-white text-sm font-semibold [font-family:'Poppins',Helvetica] 
+      transition-all duration-300 active:scale-95"
+          >
+            <span>Contact Us</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="white"
+              className="w-[18px] h-[18px]"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M21 10c0 6.075-4.925 11-11 11-1.985 0-3.849-.53-5.454-1.454L3 20l1.454-1.546A10.96 10.96 0 0 1 2 10C2 4.925 6.925 0 12 0s10 4.925 10 10z"
+              />
+            </svg>
+          </button>
         </div>
 
-        <div className="w-full h-[43px] bg-[#ed9821] mt-[57px] flex items-center justify-center">
-          <p className="[font-family:'Poppins',Helvetica] font-normal text-black text-sm tracking-[0] leading-[23.2px] whitespace-nowrap">
-            © 2025 Borigam Institute. All Rights Reserved
-          </p>
-        </div>
-      </footer> */}
-      <FooterSection />
 
-      <Button className="fixed top-[796px] right-[106px] w-[126px] h-[127px] rounded-full p-0 bg-transparent hover:bg-transparent border-0 shadow-none h-auto">
-        <img className="w-full h-full" alt="WhatsApp" src="/frame-4414.svg" />
-      </Button>
+        {/* Footer */}
+        <FooterSection />
+
+        {/* Floating WhatsApp Button */}
+        <Button className="fixed bottom-32 right-6 sm:bottom-32 sm:right-10 w-[40px] sm:w-[70px] h-[40px] sm:h-[70px] rounded-full bg-transparent hover:bg-transparent p-0 shadow-none">
+          <img className="w-full h-full" alt="WhatsApp" src={whatsapp} />
+        </Button>
+      </div>
     </div>
   );
 };

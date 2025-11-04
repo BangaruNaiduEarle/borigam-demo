@@ -3,7 +3,6 @@ import { Card, CardContent } from "../../../../components/ui/card";
 import vision from "../../../../assets/vision.png";
 import mission from "../../../../assets/mission.png";
 
-
 const sections = [
   {
     id: "vision",
@@ -23,34 +22,43 @@ We believe that every student can succeed with the right support, and we're here
     icon: mission,
     title: "Mission",
     content: `At Borigam Coaching Institution, our vision is to empower every student with knowledge, confidence, and discipline to achieve academic excellence and succeed in life. We strive to become a leading center of learning and transformation, where students are not only prepared for exams but are also nurtured to become critical thinkers, ethical leaders, and responsible citizens.
+
 We envision a future where every learner who walks through our doors is inspired to dream big, equipped to work hard, and guided to reach their full potential — regardless of their background. Through innovative teaching methods, dedicated faculty, and a student-centered approach, we aim to set new benchmarks in the field of education.
+
 Borigam Coaching Institution is not just a place to learn — it's a place to grow, evolve, and build the foundation for a successful future.`,
   },
 ];
 
 export const TestimonialsSection = (): JSX.Element => {
   return (
-    <section  className="w-full py-[100px] px-4 md:px-8 lg:px-16 bg-cover bg-center">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-9 max-w-[1440px] mx-auto">
+    <section className="w-full py-10 sm:py-14 md:py-20 px-4 sm:px-8 lg:px-16 bg-white">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 max-w-[1440px] mx-auto">
         {sections.map((section) => (
           <Card
             key={section.id}
             className="border-0 shadow-none bg-transparent"
           >
-            <CardContent className="flex flex-col gap-[33px] p-[27px]">
-              <div className="inline-flex items-center gap-2.5 py-[11px] border-b-[6px] border-[#ef5134] w-max">
+            <CardContent className="flex flex-col gap-6 sm:gap-8 md:gap-10 p-4 sm:p-6 md:p-8 lg:p-10">
+              {/* Heading */}
+              <div className="inline-flex items-center gap-3 sm:gap-4 py-3 border-b-[5px] border-[#ef5134] w-max">
                 <img
-                  className={`${section.id === "vision" ? "w-[89px] h-[89.62px]" : "w-20 h-[80.56px]"} object-cover`}
+                  className={`${
+                    section.id === "vision"
+                      ? "w-16 sm:w-20 md:w-[85px]"
+                      : "w-14 sm:w-16 md:w-[80px]"
+                  } object-contain`}
                   alt={section.title}
                   src={section.icon}
                 />
-                <h2 className="[font-family:'Poppins',Helvetica] font-normal text-[#555a66] text-[91.8px] tracking-[1.84px] leading-[118.0px] whitespace-nowrap">
+                <h2 className="font-poppins font-semibold text-[#555a66] text-3xl sm:text-4xl md:text-5xl lg:text-[72px] tracking-tight leading-[1.1] capitalize">
                   {section.title}
                 </h2>
               </div>
-              <div className="flex flex-col gap-[33px]">
-                <p className="[font-family:'Poppins',Helvetica] font-normal text-[#555a66] text-sm tracking-[0.28px] leading-[24px] whitespace-pre-line">
-                  {section.content} 
+
+              {/* Paragraph */}
+              <div className="flex flex-col gap-4">
+                <p className="font-poppins font-normal text-[#555a66] text-sm sm:text-base md:text-lg leading-relaxed whitespace-pre-line">
+                  {section.content}
                 </p>
               </div>
             </CardContent>

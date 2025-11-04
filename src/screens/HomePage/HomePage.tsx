@@ -1,19 +1,19 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
 import { AboutUsSection } from "./sections/AboutUsSection";
 import { CollegeLogosSection } from "./sections/CollegeLogosSection";
 import { ContactUsSection } from "./sections/ContactUsSection";
 import { EntranceExamsSection } from "./sections/EntranceExamsSection";
 import { GallerySection } from "./sections/GallerySection";
-import { HeroSection } from "./sections/HeroSection";
-import { MissionVisionSection } from "./sections/MissionVisionSection";
+
+import { HeroWithStatsSection } from "./sections/HeroWithStatsSection";
+
 import { ServicesSection } from "./sections/ServicesSection";
 import { SuccessStoriesSection } from "./sections/SuccessStoriesSection";
 import { TeamSection } from "./sections/TeamSection";
 import { TestimonialsSection } from "./sections/TestimonialsSection";
 import { Footer } from "./sections/Footer";
 
-
-import flight_vector from "../../assets/flight_vector.png";
 import logo1 from "../../assets/logo1.png";
 import logo2 from "../../assets/logo2.png";
 import logo3 from "../../assets/logo3.png";
@@ -26,72 +26,14 @@ import logo9 from "../../assets/logo9.png";
 import logo10 from "../../assets/logo10.png";
 import logo11 from "../../assets/logo11.png";
 import logo12 from "../../assets/logo12.png";
+import whatsapp from "../../assets/whatsapp-icon-free-png.webp";
+
+import flight_vector from "../../assets/flight_vector.png";
+
+
 import { FooterSection } from "./sections/Footer";
-
-
-
-const footerColumns = [
-  {
-    title: "ENTRANCE EXAM COACHING",
-    left: "left-[203px]",
-    links: [
-      "NID Entrance Exam",
-      "CEED Entrance Exam",
-      "UCEED Entrance Exam",
-      "NATA & JEE P2 Entrance Exam",
-      "NIFT Entrance Exam",
-      "Portfolio Guidance",
-      "Student Testimonials",
-    ],
-  },
-  {
-    title: "STUDY MATERIAL",
-    left: "left-[493px]",
-    links: [
-      "NID Entrance Exam",
-      "CEED Entrance Exam",
-      "UCEED Entrance Exam",
-      "NATA & JEE P2 Entrance Exam",
-      "NIFT Entrance Exam",
-      "Portfolio Guidance",
-      "Student Testimonials",
-    ],
-  },
-  {
-    title: "PAST YEAR PAPERS",
-    left: "left-[767px]",
-    links: [
-      "NID Entrance Exam",
-      "CEED Entrance Exam",
-      "UCEED Entrance Exam",
-      "NATA & JEE P2 Entrance Exam",
-      "NIFT Entrance Exam",
-      "Portfolio Guidance",
-      "Student Testimonials",
-    ],
-  },
-  {
-    title: "MOCK TESTS",
-    left: "left-[1041px]",
-    links: [
-      "NID Entrance Exam",
-      "CEED Entrance Exam",
-      "UCEED Entrance Exam",
-      "NATA & JEE P2 Entrance Exam",
-      "NIFT Entrance Exam",
-      "Portfolio Guidance",
-      "Student Testimonials",
-    ],
-  },
-];
-
-const socialIcons = [
-  { src: "/icons-2.svg", alt: "Social icon 1" },
-  { src: "/icons-4.svg", alt: "Social icon 2" },
-  { src: "/icons.svg", alt: "Social icon 3" },
-  { src: "/icons-1.svg", alt: "Social icon 4" },
-  { src: "/icons-3.svg", alt: "Social icon 5" },
-];
+import { AbroadBadge } from "./sections/AbroadBadge";
+import { Button } from "../../components/ui/button";
 
 const collegeLogos = [
   { src: logo1, },
@@ -108,50 +50,56 @@ const collegeLogos = [
   { src: logo12, },
 ];
 
-const testimonialDots = [
-  { size: "w-[15px] h-[15px]", bg: "bg-[#d9d9d9]" },
-  { size: "w-[15px] h-[15px]", bg: "bg-[#ef5134]" },
-  { size: "w-[15px] h-[15px]", bg: "bg-[#d9d9d9]" },
-];
 
-const galleryDots = [
-  { size: "w-[11.28px] h-[11.28px]", bg: "bg-[#d9d9d9]" },
-  { size: "w-[21.05px] h-[21.05px]", bg: "bg-[#ef5134]" },
-  { size: "w-[11.28px] h-[11.28px]", bg: "bg-[#d9d9d9]" },
-  { size: "w-[11.28px] h-[11.28px]", bg: "bg-[#d9d9d9]" },
-  { size: "w-[11.28px] h-[11.28px]", bg: "bg-[#d9d9d9]" },
-  { size: "w-[11.28px] h-[11.28px]", bg: "bg-[#d9d9d9]" },
-];
 
 export const HomePage = (): JSX.Element => {
+  const abroadRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    gsap.fromTo(
+      abroadRef.current,
+      { opacity: 0, y: -30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1,
+        ease: "power3.out",
+        delay: 0.4, // small delay so it syncs with page load
+      }
+    );
+
+  }, []);
   return (
 
     <div className=" flex flex-col items-center justify-center ">
 
       <div className="bg-white w-full relative max-w-7xl ">
-        <div className="flex w-[348px] items-end justify-center gap-2.5 px-4 py-[18px] absolute top-0 left-[calc(50.00%_-_174px)] rounded-[0px_0px_15px_15px] bg-[linear-gradient(236deg,rgba(239,81,52,1)_0%,rgba(238,153,33,1)_100%)] z-10">
-          <div className="relative w-fit [font-family:'Poppins',Helvetica] font-bold text-white text-sm tracking-[0] leading-[normal] whitespace-nowrap">
-            Abroad education
+        {/* <div
+          ref={abroadRef}
+          className="flex items-center justify-center gap-2.5 px-4 sm:px-5 py-[12px] sm:py-[14px] 
+  absolute top-0 left-1/2 -translate-x-1/2 
+  rounded-b-[15px] 
+  bg-[linear-gradient(236deg,rgba(239,81,52,1)_0%,rgba(238,153,33,1)_100%)] 
+  z-10 shadow-md w-[80%] max-w-[340px] sm:max-w-[360px] md:max-w-[380px]"
+        >
+          <div className="font-poppins font-semibold text-white text-xs sm:text-sm md:text-base tracking-[0] leading-none whitespace-nowrap">
+            Abroad Education
           </div>
           <img
-            className="relative w-[19.49px] h-[19.49px] mb-[-0.75px]"
+            className="w-[18px] sm:w-[20px] h-[18px] sm:h-[20px] translate-y-[1px]"
             alt="Flight Vector"
             src={flight_vector}
           />
-        </div>
-
-
-
+        </div> */}
         <ServicesSection />
 
-        <div className="relative">
+        <div className="relative w-full">
+          <div className="hidden md:block">
+            <AbroadBadge />
 
-          <HeroSection />
+          </div>
+          <HeroWithStatsSection />
         </div>
-        <div className="absolute top-[600px] w-full">
 
-          <MissionVisionSection />
-        </div>
 
 
 
@@ -171,72 +119,104 @@ export const HomePage = (): JSX.Element => {
         <AboutUsSection />
       </div>
 
-      <div className="bg-[#f5f5f5] w-full  max-w-full">
+      <div className="bg-[#f5f5f5] w-full max-w-full">
+        {/* GALLERY SECTION */}
         <GallerySection />
 
+        {/* COLLEGE LOGOS SECTION */}
         <section className="w-full bg-white flex justify-center">
-          <div className="max-w-7xl  py-[100px]">
+          <div className="max-w-7xl w-full px-4 sm:px-6 md:px-10 lg:px-12 py-14 sm:py-20 md:py-24">
+            {/* Heading */}
+            <h2 className="font-merriweather font-bold text-[#ef5134] text-3xl sm:text-4xl md:text-[46px] text-center mb-6 sm:mb-8">
+              College Logos
+            </h2>
 
-
-            <div className="  [font-family:'Merriweather',Helvetica] font-bold text-[#ef5134] text-[46.3px] tracking-[0] leading-[normal] text-center mb-8">
-              College logos
+            {/* Subtitle */}
+            <div className="flex justify-center mb-10 sm:mb-14">
+              <p className="font-poppins font-light text-[#4d4d4d] text-sm sm:text-base md:text-lg text-center max-w-[560px]">
+                Comprehensive coaching for all major design and architecture entrance examinations
+              </p>
             </div>
 
-            <div className="flex justify-center">
-              <div className=" w-[560px] [font-family:'Poppins',Helvetica] font-light text-[#4d4d4d] text-base  tracking-[0] leading-[normal] text-center">
-                Comprehensive coaching for all major design and architecture entrance
-                examinations
-              </div>
-            </div>
-
-
-
-            <div className="grid grid-cols-6  gap-20 mt-20">
+            {/* Logos Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 sm:gap-10 md:gap-14 lg:gap-20 justify-items-center items-center">
               {collegeLogos.map((logo, index) => (
                 <img
                   key={`college-logo-${index}`}
-                  className="w-[110px] h-[110px]"
-                  alt="Rectangle"
                   src={logo.src}
+                  alt={`College logo ${index + 1}`}
+                  className="w-[80px] sm:w-[100px] md:w-[110px] h-auto object-contain transition-transform duration-300 hover:scale-105"
                 />
               ))}
             </div>
           </div>
-
         </section>
 
-
-
-        <section id="success-stories" className=" w-full py-[100px]">
-
-
-          <div className=" [font-family:'Merriweather',Helvetica] font-bold text-[#ef5134] text-[46.3px] tracking-[0] leading-[normal] mb-4">
-            <h1 className="text-center">
-
-              Student Success Stories
-            </h1>
-          </div>
-
+        {/* STUDENT SUCCESS STORIES */}
+        <section
+          id="success-stories"
+          className="w-full bg-[#f5f5f5] py-14 sm:py-20 md:py-24 px-4 sm:px-6 md:px-10"
+        >
+          <h2 className="font-merriweather font-bold text-[#ef5134] text-3xl sm:text-4xl md:text-[46px] text-center md:mb-10">
+            Student Success Stories
+          </h2>
           <CollegeLogosSection />
-
         </section>
 
-
+        {/* SUCCESS STORIES SLIDER */}
         <SuccessStoriesSection />
 
-        <section id="contact-us" className=" w-full bg-white pb-[42px]">
-
-          <div className="[font-family:'Merriweather',Helvetica] font-bold text-[#ef5134] text-[46.3px] tracking-[0] leading-[normal]">
-            <h1 className="text-center">
-              Contact us
-            </h1>
-          </div>
+        {/* CONTACT US */}
+        <section
+          id="contact-us"
+          className="w-full bg-white py-14 sm:py-20 md:py-24 px-4 sm:px-6 md:px-10"
+        >
+          <h2 className="font-merriweather font-bold text-[#ef5134] text-3xl sm:text-4xl md:text-[46px] text-center mb-10">
+            Contact Us
+          </h2>
           <ContactUsSection />
         </section>
 
+        {/* === Mobile Fixed Bottom Buttons (Borigam Theme) === */}
+        <div className="fixed bottom-0 left-0 w-full flex md:hidden z-[50] shadow-[0_-3px_10px_rgba(0,0,0,0.15)]">
+          {/* Left: Abroad Education */}
+          <button
+            className="flex-1 flex items-center justify-center gap-2 px-3 py-4 
+      bg-gradient-to-r from-[#ef5134] to-[#ee9921] 
+      text-white text-sm font-semibold [font-family:'Poppins',Helvetica] 
+      transition-all duration-300 active:scale-95"
+          >
+            <span>Abroad Education</span>
+            <img
+              className="w-[18px] h-[18px] object-contain"
+              alt="Flight Vector"
+              src={flight_vector}
+            />
+          </button>
 
+          {/* Right: Contact Us */}
+          <button
+            onClick={() => window.location.href = '#contact-us'}
+            className="flex-1 flex items-center justify-center gap-2 px-3 py-4 
+      bg-gradient-to-r from-[#fbbc04] to-[#ef5134] 
+      text-white text-sm font-semibold [font-family:'Poppins',Helvetica] 
+      transition-all duration-300 active:scale-95"
+          >
+            <span>Contact Us</span>
+           
+          </button>
+        </div>
+
+
+        {/* FOOTER */}
         <FooterSection />
+
+        {/* Floating WhatsApp Button */}
+        <Button className="fixed bottom-32 right-6 sm:bottom-10 sm:right-10 w-[40px] sm:w-[70px] h-[40px] sm:h-[70px] rounded-full bg-transparent hover:bg-transparent p-0 shadow-none">
+          <img className="w-full h-full" alt="WhatsApp" src={whatsapp} />
+        </Button>
       </div>
+
     </div >
   );
 };

@@ -57,17 +57,10 @@ module.exports = {
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
-  		fontFamily: {
-  			sans: [
-  				'ui-sans-serif',
-  				'system-ui',
-  				'sans-serif',
-  				'Apple Color Emoji"',
-  				'Segoe UI Emoji"',
-  				'Segoe UI Symbol"',
-  				'Noto Color Emoji"'
-  			]
-  		},
+  		 fontFamily: {
+        poppins: ["Poppins", "Helvetica", "sans-serif"],
+        merriweather: ["Merriweather", "Helvetica", "serif"],
+      },
   		keyframes: {
   			'accordion-down': {
   				from: {
