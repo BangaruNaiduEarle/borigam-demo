@@ -164,29 +164,39 @@ export const CourseInnerPage = (): JSX.Element => {
 
         {/* Two-Column Section */}
         <section className="flex flex-col md:flex-row items-center gap-10 md:gap-20 px-8 sm:px-10 md:px-20 lg:px-[200px] py-16">
-          <div className="flex flex-col gap-6">
-            <h2 className="font-merriweather font-bold text-[#ef5134] text-3xl sm:text-[46.3px]">
-              Heading
-            </h2>
-            <p className="font-poppins text-[#4d4d4d] text-lg md:text-2xl">
-              We provide everything you need to excel <br /> in your entrance exams
-            </p>
-            <p className="font-poppins text-[#555a66] text-sm leading-relaxed">
-              At Peakview Academy, our goal is to provide top-tier, results-driven education, empowering students to excel academically and personally. We pledge to:<br /><br />
-              • Provide expert instruction through dedicated and experienced faculty.<br />
-              • Cultivate a nurturing learning atmosphere.<br />
-              • Employ innovative teaching methods and tailored mentorship.<br />
-              • Develop strong ethics, analytical abilities, and a growth mindset.
-            </p>
-          </div>
-          <div className="w-full md:w-1/2 flex justify-center">
-            <img
-              className="rounded-2xl object-cover w-full sm:w-[400px] md:w-[475px]"
-              alt="Course Section"
-              src={course_section}
-            />
-          </div>
-        </section>
+  {/* Left Text Content */}
+  <div className="flex flex-col gap-6">
+    <h2 className="font-merriweather font-bold text-[#ef5134] text-3xl sm:text-[46.3px]">
+      Heading
+    </h2>
+
+    <p className="font-poppins text-[#4d4d4d] text-lg md:text-2xl">
+      We provide everything you need to excel <br /> in your entrance exams
+    </p>
+
+    <div className="font-poppins text-[#555a66] text-sm leading-relaxed">
+      <p className="mb-3">
+        At Peakview Academy, our goal is to provide top-tier, results-driven education, empowering students to excel academically and personally. We pledge to:
+      </p>
+      <ul className="list-disc list-inside space-y-2">
+        <li>Provide expert instruction through dedicated and experienced faculty.</li>
+        <li>Cultivate a structured, nurturing, and inspiring learning atmosphere where every student is motivated to achieve their maximum potential.</li>
+        <li>Employ innovative teaching methods and tailored mentorship to cater to diverse learning styles.</li>
+        <li>Develop strong ethics, analytical abilities, and a growth mindset.</li>
+      </ul>
+    </div>
+  </div>
+
+  {/* Right Image */}
+  <div className="w-full md:w-1/2 flex justify-center">
+    <img
+      className="rounded-2xl object-cover w-full sm:w-[400px] md:w-[475px]"
+      alt="Course Section"
+      src={course_section}
+    />
+  </div>
+</section>
+
 
         {/* Features List */}
         <section className="px-8 sm:px-10 md:px-20 lg:px-[200px] py-12 bg-white">
@@ -302,20 +312,17 @@ export const CourseInnerPage = (): JSX.Element => {
       transition-all duration-300 active:scale-95"
           >
             <span>Contact Us</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="2"
-              stroke="white"
-              className="w-[18px] h-[18px]"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M21 10c0 6.075-4.925 11-11 11-1.985 0-3.849-.53-5.454-1.454L3 20l1.454-1.546A10.96 10.96 0 0 1 2 10C2 4.925 6.925 0 12 0s10 4.925 10 10z"
-              />
-            </svg>
+             <svg xmlns="http://www.w3.org/2000/svg" 
+       viewBox="0 0 24 24" 
+       fill="none" 
+       stroke="currentColor" 
+       strokeWidth="2" 
+       strokeLinecap="round" 
+       strokeLinejoin="round" 
+       className="w-[18px] h-[18px]">
+    <line x1="22" y1="2" x2="11" y2="13" />
+    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+  </svg>
           </button>
         </div>
 
