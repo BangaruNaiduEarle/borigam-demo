@@ -67,7 +67,7 @@ export const ContactUsSection = (): JSX.Element => {
     <section
       ref={sectionRef}
       id="contact-us"
-      className="w-full flex flex-col items-center justify-center px-4 sm:px-8 md:px-12 lg:px-16 py-16 sm:py-10 md:py-[100px] bg-white overflow-hidden"
+      className="w-full flex flex-col items-center justify-center px-4 sm:px-8 md:px-12 lg:px-16 pt-8 pb-16 sm:py-10 md:py-[100px] bg-white overflow-hidden"
     >
       <div className="flex flex-col md:flex-row items-stretch justify-center gap-6 w-full max-w-6xl flex-wrap">
         {contactCards.map((card, index) => (

@@ -169,9 +169,9 @@ export const HomePage = (): JSX.Element => {
         {/* CONTACT US */}
         <section
           id="contact-us"
-          className="w-full bg-white py-14 sm:py-20 md:py-24 px-4 sm:px-6 md:px-10"
+          className="w-full bg-white pb-14 sm:py-20 md:py-24 px-4 sm:px-6 md:px-10"
         >
-          <h2 className="font-merriweather font-bold text-[#ef5134] text-3xl sm:text-4xl md:text-[46px] text-center mb-10">
+          <h2 className="font-merriweather font-bold text-[#ef5134] text-3xl sm:text-4xl md:text-[46px] text-center ">
             Contact Us
           </h2>
           <ContactUsSection />
